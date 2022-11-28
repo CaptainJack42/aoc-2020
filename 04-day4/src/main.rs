@@ -4,7 +4,11 @@ fn main() {
     let path = "input";
     let input = fs::read_to_string(path).unwrap();
     // let data: Vec<String> = input.lines().into_iter().map(|x| x.to_string()).collect();
-    let data: Vec<String> = input.split("\n\n").into_iter().map(|x| x.to_string()).collect();
+    let data: Vec<String> = input
+        .split("\n\n")
+        .into_iter()
+        .map(|x| x.to_string())
+        .collect();
     println!("Part1: {}", part1(data.clone()));
     println!("Part2: {}", part2(data));
 }
@@ -32,19 +36,25 @@ fn part2(mut data: Vec<String>) -> usize {
                 let vals: Vec<&str> = field.split(':').collect();
                 match vals[0] {
                     "byr" => {
-                        if vals[1].parse::<usize>().unwrap_or(0) > 2002 || vals[1].parse::<usize>().unwrap_or(0) < 1920 {
+                        if vals[1].parse::<usize>().unwrap_or(0) > 2002
+                            || vals[1].parse::<usize>().unwrap_or(0) < 1920
+                        {
                             valids -= 1;
                             break;
                         }
                     }
                     "iyr" => {
-                        if vals[1].parse::<usize>().unwrap_or(0) > 2020 || vals[1].parse::<usize>().unwrap_or(0) < 2010 {
+                        if vals[1].parse::<usize>().unwrap_or(0) > 2020
+                            || vals[1].parse::<usize>().unwrap_or(0) < 2010
+                        {
                             valids -= 1;
                             break;
                         }
                     }
                     "eyr" => {
-                        if vals[1].parse::<usize>().unwrap_or(0) > 2030 || vals[1].parse::<usize>().unwrap_or(0) < 2020 {
+                        if vals[1].parse::<usize>().unwrap_or(0) > 2030
+                            || vals[1].parse::<usize>().unwrap_or(0) < 2020
+                        {
                             valids -= 1;
                             break;
                         }
@@ -52,13 +62,17 @@ fn part2(mut data: Vec<String>) -> usize {
                     "hgt" => {
                         if vals[1].ends_with("cm") {
                             let height = vals[1].strip_suffix("cm").unwrap();
-                            if height.parse::<usize>().unwrap_or(0) > 193 || height.parse::<usize>().unwrap_or(0) < 150 {
+                            if height.parse::<usize>().unwrap_or(0) > 193
+                                || height.parse::<usize>().unwrap_or(0) < 150
+                            {
                                 valids -= 1;
                                 break;
                             }
                         } else if vals[1].ends_with("in") {
                             let height = vals[1].strip_suffix("in").unwrap();
-                            if height.parse::<usize>().unwrap_or(0) > 76 || height.parse::<usize>().unwrap_or(0) < 59 {
+                            if height.parse::<usize>().unwrap_or(0) > 76
+                                || height.parse::<usize>().unwrap_or(0) < 59
+                            {
                                 valids -= 1;
                                 break;
                             }
@@ -66,15 +80,22 @@ fn part2(mut data: Vec<String>) -> usize {
                     }
                     "hcl" => {
                         if !vals[1].starts_with('#') || vals[1].len() != 7 {
-                            valids -=1;
+                            valids -= 1;
                             break;
-                        } else if !vals[1].strip_prefix('#').unwrap().chars().into_iter().all(|item| "abcdef0123456789".contains(item)) {
-                            valids -=1;
+                        } else if !vals[1]
+                            .strip_prefix('#')
+                            .unwrap()
+                            .chars()
+                            .into_iter()
+                            .all(|item| "abcdef0123456789".contains(item))
+                        {
+                            valids -= 1;
                             break;
                         }
                     }
                     "ecl" => {
-                        let ecl_vals: Vec<&str> = vec!["amb", "blu", "brn", "gry", "grn", "hzl", "oth"];
+                        let ecl_vals: Vec<&str> =
+                            vec!["amb", "blu", "brn", "gry", "grn", "hzl", "oth"];
                         if !ecl_vals.iter().any(|item| &vals[1] == item) {
                             valids -= 1;
                             break;
@@ -94,7 +115,6 @@ fn part2(mut data: Vec<String>) -> usize {
             continue;
         }
     }
-    
+
     return valids;
 }
-
