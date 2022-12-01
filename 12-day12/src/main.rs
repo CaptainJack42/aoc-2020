@@ -152,10 +152,18 @@ impl Part2Ship {
     fn advance(&mut self, instruction: &str) {
         let (action, value) = instruction.split_at(1);
         match action {
-            "N" => self.waypoint.wp_move(action, value.parse::<isize>().unwrap()),
-            "S" => self.waypoint.wp_move(action, value.parse::<isize>().unwrap()),
-            "E" => self.waypoint.wp_move(action, value.parse::<isize>().unwrap()),
-            "W" => self.waypoint.wp_move(action, value.parse::<isize>().unwrap()),
+            "N" => self
+                .waypoint
+                .wp_move(action, value.parse::<isize>().unwrap()),
+            "S" => self
+                .waypoint
+                .wp_move(action, value.parse::<isize>().unwrap()),
+            "E" => self
+                .waypoint
+                .wp_move(action, value.parse::<isize>().unwrap()),
+            "W" => self
+                .waypoint
+                .wp_move(action, value.parse::<isize>().unwrap()),
             "L" => self.waypoint.rotate_left(value.parse::<isize>().unwrap()),
             "R" => self.waypoint.rotate_right(value.parse::<isize>().unwrap()),
             "F" => self.move_fw(value.parse::<isize>().unwrap()),
